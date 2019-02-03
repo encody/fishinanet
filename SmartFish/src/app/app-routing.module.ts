@@ -12,6 +12,7 @@ const routes: Routes = [
 { path: 'ponds-and-cages/:id', component: PondOrCageDetailComponent },
 { path: 'new-pond-or-cage', component: NewPondOrCageComponent },
 { path: 'connect-bluetooth', component: ConnectBluetoothComponent },
+{ path: 'start', component: StartComponent },
 { path: '', redirectTo: '/start', pathMatch: 'full' },
 ];
 

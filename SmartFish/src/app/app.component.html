@@ -1,12 +1,28 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="icon" type="image/x-icon" href="../assets/3asset_1_2Ei_icon.ico">
+
+
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="/start">
+    <img src="../assets/Smart-Fish.svg" />
     {{ title }}
-  </h1>
-<nav>
-  <a routerLink="/ponds-and-cages">Ponds/Cages</a>
-  <a routerLink="/new-pond-or-cage">Add Pond/Cage</a>
-  <a routerLink="/connect-bluetooth">Connect Bluetooth</a>
+  </a>
+    <div id="navbarNav">
+    <ul class="navbar-nav" id="customnav">
+      <li class="nav-item">
+        <a class="nav-link" href="/start">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/ponds-and-cages">Ponds/Cages</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/new-pond-or-cage">Add Pond/Cage</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/connect-bluetooth">Connect Bluetooth</a>
+      </li>
+    </ul>
+    </div>
 </nav>
 
 <router-outlet></router-outlet>
