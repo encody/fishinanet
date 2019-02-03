@@ -1,9 +1,9 @@
-import { Application, NextFunction, Request, Response } from "express-serve-static-core";
-import { Column, Connection, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn, Repository } from "typeorm";
+import { Column, Connection, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Routable } from "../route";
 import { HabitatType } from "./HabitatType";
 import { MassReading } from "./MassReading";
 import { TempReading } from "./TempReading";
-import { Routable } from "../route";
+import { Application } from "express";
 
 @Entity()
 export class Habitat extends Routable {
