@@ -8,13 +8,24 @@ import { TempReading } from './model/TempReading';
 
 type Endpoint = 'user' | 'habitat' | 'habitatType' | 'massReading' | 'tempReading';
 
+interface Session {
+    userId: number;
+    userName: string;
+    token: string;
+    expires: number;
+}
+
 @Injectable()
 export class ApiService {
-    private baseUrl = 'http://localhost:3000';
+    private baseUrl = 'https://hidden-waters-96879.herokuapp.com';
 
     constructor (
         private http: HttpClient,
     ) { }
+
+    public getSession (): Observable<Session | false> {
+        return this.http.post(this.baseUrl + '/session', {}, { withCredentials: true }) as Observable<Session | false>;
+    }
 
     public logout (): Observable<boolean> {
         return this.http.post(this.baseUrl + '/logout', {}, { withCredentials: true }) as Observable<boolean>;

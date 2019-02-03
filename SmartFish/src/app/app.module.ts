@@ -10,6 +10,7 @@ import { StartComponent } from './start/start.component';
 import { PondOrCageDetailComponent } from './pond-or-cage-detail/pond-or-cage-detail.component';
 import { ApiService } from './services/api.service';
 import { HttpClientModule } from '@angular/common/http';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     PondsAndCagesComponent,
     NewPondOrCageComponent,
     StartComponent,
-    PondOrCageDetailComponent
+    PondOrCageDetailComponent,
+    SignInComponent,
   ],
   imports: [
     BrowserModule,

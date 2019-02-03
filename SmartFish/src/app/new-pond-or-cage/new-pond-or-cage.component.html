@@ -1,3 +1,17 @@
+<main>
+  <aside>
+    <input type="text" placeholder="Pond Name">
+    <div>
+      <input type="text" placeholder="Type">
+      <select>
+        <option
+          *ngFor="let option of api.getAll('habitatType')"
+        >{{option.name}}</option>
+      </select>
+    </div>
+  </aside>
+  <aside></aside>
+</main>
 <p>
   new-pond-or-cage works!
   <button (click)="request()">hey</button>

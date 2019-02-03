@@ -1,3 +1,12 @@
-<p>
-  start works!
-</p>
+<ng-container *ngIf="!session">
+  <input type="text" name="userName" id="userName" placeholder="Username" #userName>
+  <br>
+  <input type="password" name="pass" id="pass" #pass placeholder="Password">
+  <button type="button" (click)="logIn(userName.value, pass.value)">Submit</button>
+</ng-container>
+<ng-container
+  *ngIf="session"
+>
+  Welcome, {{session.userName}}!
+  <button type="button" (click)="logOut()">Log Out</button>
+</ng-container>
