@@ -6,6 +6,18 @@
     margin: 10px;
 }
 
-.navbar {
-    box-shadow: 0.5px 0.5px 1px #000000;
+#bg {
+    background-color: #456FFF;
+}
+
+.navbar-light .navbar-brand {
+    color: white;
+}
+
+.nav-link {
+    color: white;
+}
+
+.navbar { 
+padding: 0 0;
 }
