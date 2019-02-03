@@ -7,7 +7,7 @@ export interface ControllerRouteConfig {
     call: string,
 }
 
-export class RepositoryController {
+export class DefaultRepositoryEndpointController {
     private repository: Repository<any>;
     private path: string;
 

@@ -17,6 +17,9 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "typeorm": ["./node_modules/typeorm/typeorm-model-shim.js"]
+    }
   }
 }
