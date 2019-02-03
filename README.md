@@ -1,1 +1,3 @@
-"# mh2019-purple" 
+"# mh2019-purple"
+
+License: MIT

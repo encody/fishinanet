@@ -8,6 +8,8 @@ import { PondsAndCagesComponent } from './ponds-and-cages/ponds-and-cages.compon
 import { NewPondOrCageComponent } from './new-pond-or-cage/new-pond-or-cage.component';
 import { StartComponent } from './start/start.component';
 import { PondOrCageDetailComponent } from './pond-or-cage-detail/pond-or-cage-detail.component';
+import { ApiService } from './services/api.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,9 +22,12 @@ import { PondOrCageDetailComponent } from './pond-or-cage-detail/pond-or-cage-de
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    ApiService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
