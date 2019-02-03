@@ -1,4 +1,7 @@
 import * as bodyParser from "body-parser";
+import * as cookieParser from 'cookie-parser';
+import * as cors from 'cors';
+import * as crypto from 'crypto';
 import * as express from "express";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
@@ -7,30 +10,41 @@ import { HabitatType } from "./entity/HabitatType";
 import { MassReading } from "./entity/MassReading";
 import { TempReading } from "./entity/TempReading";
 import { User } from "./entity/User";
-import { DefaultRepositoryEndpointController } from "./RepositoryController";
-import * as cors from 'cors';
-import * as crypto from 'crypto';
-import * as cookieParser from 'cookie-parser';
 import { hashPasswordAndSalt } from "./hash";
+import { routeDefault } from "./route";
 
 const sessionCookie = 'fishina-session';
 
 createConnection().then(async connection => {
     const app = express();
     app.use(bodyParser.json());
-    app.use(cors());
+    app.use(cors({
+        origin: true,
+        credentials: true,
+    }));
     app.use(cookieParser());
 
     const sessions: Map<string, {
         userId: number,
+        userName: string,
+        token: string,
         expires: number,
     }> = new Map();
 
     const userRepo = connection.getRepository(User);
+    const habitatRepo = connection.getRepository(Habitat);
 
-    userRepo.create({
+    // app.get('/test', async (req, res, next) => {
+    //     res.send(await habitatRepo.find({
+    //         relations: [ 'habitatType' ],
+    //     }));
+    // });
 
-    })
+    app.post('/session', async (req, res, next) => {
+        const session = sessions.get(req.cookies[sessionCookie]);
+
+        res.send(session || false);
+    });
 
     app.post('/login', async (req: express.Request, res: express.Response) => {
         const user = await userRepo.findOne({
@@ -44,18 +58,22 @@ createConnection().then(async connection => {
             );
 
             if (Buffer.compare(user.pass, hashed) === 0) {
-                const key = crypto.randomBytes(32).toString('hex');
-                sessions.set(key, {
+                const token = crypto.randomBytes(32).toString('hex');
+                sessions.set(token, {
                     userId: user.id,
                     // Expire session in 3 hours
                     expires: Date.now() + 1000 * 60 * 60 * 3,
+                    token,
+                    userName: user.userName,
                 });
-                res.cookie(sessionCookie, key).send(true);
+                res.cookie(sessionCookie, token).send(true);
                 return;
             }
         }
 
+        res.status(401);
         res.clearCookie(sessionCookie).send(false);
+        res.end();
     });
 
     app.all('/logout', async (req: express.Request, res: express.Response) => {
@@ -64,12 +82,17 @@ createConnection().then(async connection => {
 
     // Verify login session
     app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
-        console.log(req.cookies);
-        next();
+        if (req.cookies[sessionCookie] && sessions.get(req.cookies[sessionCookie]).expires > Date.now()) {
+            next();
+        } else {
+            res.status(401);
+            res.send(false);
+            res.end();
+        }
     });
 
     const entities: {schema: any, path: string}[] = [
-        { schema: User,          path: '/user',          },
+        // { schema: User,          path: '/user',          },
         { schema: Habitat,       path: '/habitat',       },
         { schema: HabitatType,   path: '/habitatType',   },
         { schema: MassReading,   path: '/massReading',   },
@@ -77,18 +100,25 @@ createConnection().then(async connection => {
     ];
 
     entities.forEach(entity => {
-        const controller =
-            new DefaultRepositoryEndpointController(entity.schema, entity.path);
-
-        controller.routes().forEach(routeConfig => {
-            app[routeConfig.method](routeConfig.path, async (req, res, next) => {
-                res.send(await controller[routeConfig.call](req, res, next));
-            });
-        })
+        const repo = connection.getRepository(entity.schema);
+        routeDefault(app, entity.path, repo, entity.schema.relations());
+        entity.schema.route(app, entity.path, connection);
     });
+
+    app.use((req, res, next) => {
+        const sess = sessions.get(req.cookies[sessionCookie]);
+        if (sess.userName === 'admin' || req.params.id === sess.userId) {
+            next();
+        } else {
+            res.status(401);
+            res.send(false);
+            res.end();
+        }
+    });
+
+    routeDefault(app, '/user', connection.getRepository(User), User.relations());
 
     app.listen(3000);
 
-    console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
-
+    console.log("Server started");
 }).catch(error => console.log(error));

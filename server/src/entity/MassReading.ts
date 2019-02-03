@@ -1,8 +1,9 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Routable } from "../route";
 import { Habitat } from "./Habitat";
 
 @Entity()
-export class MassReading {
+export class MassReading extends Routable {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -13,10 +14,13 @@ export class MassReading {
         _type => Habitat,
         ht => ht.massReadings,
     )
+    @JoinColumn()
     habitat: Habitat;
 
-    @Column({
-        default: () => 'current_timestamp',
-    })
+    @CreateDateColumn()
     dt: Date;
+
+    public static relations (): string[] {
+        return ['habitat'];
+    }
 }
