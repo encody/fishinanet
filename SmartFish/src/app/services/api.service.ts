@@ -2,23 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import 'typeorm';
-import { Habitat } from '../../../../server/src/entity/Habitat';
-import { HabitatType } from '../../../../server/src/entity/HabitatType';
-import { MassReading } from '../../../../server/src/entity/MassReading';
-import { TempReading } from '../../../../server/src/entity/TempReading';
-import { User } from '../../../../server/src/entity/User';
+// import { Habitat } from '../../../../server/src/entity/Habitat';
+// import { HabitatType } from '../../../../server/src/entity/HabitatType';
+// import { MassReading } from '../../../../server/src/entity/MassReading';
+// import { TempReading } from '../../../../server/src/entity/TempReading';
+// import { User } from '../../../../server/src/entity/User';
 
 
-export { User, Habitat, HabitatType, MassReading, TempReading, };
+// export { User, Habitat, HabitatType, MassReading, TempReading, };
 
 const endpoints: Map<any, string> = new Map();
 
-endpoints.set(User, 'user');
-endpoints.set(Habitat, 'habitat');
-endpoints.set(HabitatType, 'habitatType');
-endpoints.set(MassReading, 'massReading');
-endpoints.set(TempReading, 'tempReading');
+// endpoints.set(User, 'user');
+// endpoints.set(Habitat, 'habitat');
+// endpoints.set(HabitatType, 'habitatType');
+// endpoints.set(MassReading, 'massReading');
+// endpoints.set(TempReading, 'tempReading');
 
 @Injectable()
 export class ApiService {
