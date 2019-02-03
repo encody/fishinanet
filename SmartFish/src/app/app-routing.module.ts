@@ -13,7 +13,7 @@ const routes: Routes = [
 { path: 'new-pond-or-cage', component: NewPondOrCageComponent },
 { path: 'connect-bluetooth', component: ConnectBluetoothComponent },
 { path: 'start', component: StartComponent },
-{ path: '', redirectTo: '/start', pathMatch: 'full' },
+{ path: '', redirectTo: '/new-pond-or-cage', pathMatch: 'full' },
 ];
 
 @NgModule({
