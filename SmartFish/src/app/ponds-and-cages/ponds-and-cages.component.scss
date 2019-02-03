@@ -17,6 +17,6 @@
 .nohabitatContainer {
   display: grid;
   grid-template-columns: auto 300px auto 50%;
-  grid-template-areas: '. navigation . content';
+  grid-template-areas: '. navigation habitats content';
 
 }
