@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import 'typeorm';
 import { Habitat } from '../../../../server/src/entity/Habitat';
 import { HabitatType } from '../../../../server/src/entity/HabitatType';
 import { MassReading } from '../../../../server/src/entity/MassReading';
