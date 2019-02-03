@@ -1,12 +1,14 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn} from "typeorm";
+import { Routable } from "../route";
 
 @Entity()
-export class User {
+export class User extends Routable {
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column({
         length: 255,
+        unique: true,
     })
     userName: string;
 
@@ -22,14 +24,9 @@ export class User {
     })
     salt: Buffer;
 
-    @Column({
-        default: () => 'current_timestamp',
-        onUpdate: 'current_timestamp',
-    })
+    @UpdateDateColumn()
     ts: Date;
 
-    @Column({
-        default: () => 'current_timestamp',
-    })
+    @CreateDateColumn()
     dt: Date;
 }
