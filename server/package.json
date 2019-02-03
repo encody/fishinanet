@@ -1,0 +1,24 @@
+{
+   "name": "fishinanet-server",
+   "version": "0.1.0",
+   "description": "FishInA.Net Server",
+   "scripts": {
+      "start": "ts-node src/index.ts",
+      "watch": "tsc --watch",
+      "build": "tsc"
+   },
+   "author": "Jacob Lindahl <aviator9402@gmail.com>",
+   "license": "MIT",
+   "devDependencies": {
+      "@types/node": "^8.0.29",
+      "typescript": "2.5.2",
+      "ts-node": "3.3.0"
+   },
+   "dependencies": {
+      "body-parser": "^1.18.1",
+      "express": "^4.15.4",
+      "mysql": "^2.14.1",
+      "reflect-metadata": "^0.1.10",
+      "typeorm": "0.2.12"
+   }
+}
