@@ -1,0 +1,27 @@
+.nohabitat {
+  vertical-align: middle;
+  padding: 16px;
+  min-height: 80vh;
+  width: 100%;
+  float: right;
+  background-color: #EEEEEE;
+}
+
+.nohabitat_text {
+  margin: 10px;
+  padding-left: 20px;
+  max-width: 500px;
+  padding-top: 50%;
+}
+
+.nohabitatContainer {
+  display: grid;
+  grid-template-columns: auto 300px auto 50%;
+  grid-template-areas: '. navigation habitats content';
+
+}
+
+.habitat { 
+    margin: 10px;
+    display: flex;
+}

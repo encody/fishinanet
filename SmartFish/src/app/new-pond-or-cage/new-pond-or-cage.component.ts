@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Habitat } from '../habitat';
 import { ApiService } from '../services/api.service';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-new-pond-or-cage',
@@ -7,15 +9,21 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./new-pond-or-cage.component.scss']
 })
 export class NewPondOrCageComponent implements OnInit {
+    habitatId: number = null;
+    habitats: Observable<any[]>;
+    selectedHabitat: Habitat;
 
-  constructor(
-    private api: ApiService,
-  ) { }
+
+constructor(private api: ApiService) { }
 
   ngOnInit() {
+    this.getHabitats();
   }
+  getHabitats(){
 
-  request () {
-    console.log(this.api);
-  }
+   this.habitats = this.api.getAll<any>('habitat');
+   
+
 }
+}
+ 
