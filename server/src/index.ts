@@ -40,6 +40,12 @@ createConnection().then(async connection => {
     //     }));
     // });
 
+    app.post('/session', async (req, res, next) => {
+        const session = sessions.get(req.cookies[sessionCookie]);
+
+        res.send(session || false);
+    });
+
     app.post('/login', async (req: express.Request, res: express.Response) => {
         const user = await userRepo.findOne({
             userName: req.body.userName,

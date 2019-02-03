@@ -3,7 +3,7 @@
    "version": "0.1.0",
    "description": "FishInA.Net Server",
    "scripts": {
-      "start": "ts-node src/index.ts",
+      "start": "tsc && node ./build/index.js",
       "watch": "tsc --watch",
       "build": "tsc"
    },
