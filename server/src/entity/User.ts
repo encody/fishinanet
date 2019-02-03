@@ -14,13 +14,13 @@ export class User {
         type: 'varbinary',
         length: 32,
     })
-    pass: number;
+    pass: Buffer;
 
     @Column({
         type: 'varbinary',
         length: 32,
     })
-    salt: number;
+    salt: Buffer;
 
     @Column({
         default: () => 'current_timestamp',
