@@ -16,25 +16,30 @@ export class Habitat extends Routable {
     })
     name: string;
 
+    @Column({
+        length: 255,
+    })
+    fishVariety: string;
+
+    @Column('double precision')
+    averageSize: number;
+
     @ManyToOne(
         _type => HabitatType,
         ht => ht.habitats,
     )
-    @JoinColumn({
-        name: 'habitatTypeId',
-        referencedColumnName: 'id',
-    })
+    @JoinColumn()
     habitatType: HabitatType;
 
     @OneToMany(
-        _type => HabitatType,
-        ht => ht.habitats,
+        _type => TempReading,
+        r => r.habitat,
     )
     tempReadings: TempReading[];
 
     @OneToMany(
-        _type => HabitatType,
-        ht => ht.habitats,
+        _type => MassReading,
+        r => r.habitat,
     )
     massReadings: MassReading[];
 

@@ -14,10 +14,7 @@ export class MassReading extends Routable {
         _type => Habitat,
         ht => ht.massReadings,
     )
-    @JoinColumn({
-        name: 'habitatId',
-        referencedColumnName: 'id',
-    })
+    @JoinColumn()
     habitat: Habitat;
 
     @CreateDateColumn()
